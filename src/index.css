@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=gideon:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+/* Local font faces */
+/* Gideon Roman */
+@font-face {
+  font-family: 'Gideon Roman';
+  src: url('/fonts/GideonRoman-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* UnifrakturMaguntia */
+@font-face {
+  font-family: 'UnifrakturMaguntia';
+  src: url('/fonts/UnifrakturMaguntia-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Canopee (OTF in public/fonts) */
+@font-face {
+  font-family: 'Canopee';
+  src: url('/fonts/Canopee-Regular.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* The Paper Portfolio Design System - Vintage Newspaper Theme */
+
+@layer base {
+  :root {
+    /* Paper Portfolio Theme - Light/Vintage */
+    --background: 37 30% 78%;
+    --foreground: 25 25% 15%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 25 25% 15%;
+    
+    --primary: 25 25% 15%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 42 21% 85%;
+    --secondary-foreground: 25 25% 15%;
+    
+    --muted: 42 21% 85%;
+    --muted-foreground: 25 25% 45%;
+    
+    --accent: 15 86% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    --border: 42 21% 80%;
+    --input: 0 0% 100%;
+    --ring: 15 86% 55%;
+    
+    /* Paper Portfolio Specific Colors */
+    --paper-bg: 37 30% 78%;
+    --paper-surface: 0 0% 100%;
+    --paper-surface-hover: 37 30% 78%;
+    --paper-text: 25 25% 15%;
+    --paper-text-muted: 25 25% 45%;
+    --paper-accent: 15 86% 55%;
+    --paper-accent-secondary: 210 100% 50%;
+    --paper-border: 42 21% 80%;
+    
+    /* Paper texture and vintage effects */
+    --paper-texture: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='27' cy='27' r='1'/%3E%3Ccircle cx='47' cy='47' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    
+    /* Shadows for paper effect */
+    --shadow-paper: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    
+    /* Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-gideon antialiased;
+    background-image: url('images/paper-bg.jpg');
+    background-repeat: repeat;
+    background-size: 200px 200px; 
+    background-position: 0 0;
+    background-attachment: fixed; 
+    background-blend-mode: multiply;
+    color: hsl(var(--paper-text));
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 640px) {
+    body { background-attachment: scroll; }
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--paper-bg));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--paper-accent));
+    border-radius: 2px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--paper-accent-secondary));
+  }
+
+  /* Text Selection - Newspaper Theme */
+  ::selection {
+    background: hsl(var(--paper-accent));
+    color: hsl(var(--accent-foreground));
+  }
+  ::-moz-selection {
+    background: hsl(var(--paper-accent));
+    color: hsl(var(--accent-foreground));
+  }
+}
+
+@layer components {
+  /* Paper Portfolio Typography */
+  .newspaper-title {
+    @apply font-playfair text-xl md:text-2xl font-bold tracking-wide;
+    color: hsl(var(--paper-text));
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+  
+  .headline-large {
+    @apply font-playfair text-4xl md:text-6xl lg:text-8xl font-black leading-none tracking-tight;
+    color: hsl(var(--paper-text));
+    text-transform: uppercase;
+  }
+  
+  .headline-medium {
+    @apply font-playfair text-2xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight;
+    color: hsl(var(--paper-text));
+    text-transform: uppercase;
+  }
+  
+  .headline-small {
+    @apply font-playfair text-xl md:text-2xl lg:text-3xl font-bold leading-tight;
+    color: hsl(var(--paper-text));
+    text-transform: uppercase;
+  }
+  
+  .body-text {
+    @apply font-gideon text-sm md:text-base leading-relaxed;
+    color: hsl(var(--paper-text-muted));
+  }
+  
+  .location-text {
+    @apply font-gideon text-sm font-medium tracking-wide;
+    color: hsl(var(--paper-text-muted));
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  /* Paper gideonactive Elements */
+  .paper-card {
+    background: hsl(var(--paper-surface));
+    border: 1px solid hsl(var(--paper-border));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-paper);
+    transition: var(--transition-smooth);
+  }
+  
+  .paper-card:hover {
+    background: hsl(var(--paper-surface-hover));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .new-badge {
+    @apply inline-block px-2 py-1 text-xs font-bold tracking-wider;
+    background: hsl(var(--paper-accent));
+    color: hsl(var(--accent-foreground));
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* Gradient Text Animation */
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Magnetic Effect */
+  .magnetic {
+    transition: var(--transition-bounce);
+  }
+  
+  /* Reveal Animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: var(--transition-smooth);
+  }
+  
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bg-portfolio-surface-hover {
+    background: hsl(var(--paper-surface-hover));
+  }
+  
+  .bg-portfolio-accent {
+    background: hsl(var(--paper-accent));
+  }
+
+  /* Loading Dots */
+  .loading-dots {
+    display: inline-flex;
+    gap: 4px;
+  }
+  
+  .loading-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: hsl(var(--portfolio-accent));
+    animation: loading-bounce 1.4s ease-in-out infinite both;
+  }
+  
+  .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+  .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+  
+  @keyframes loading-bounce {
+    0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+    40% { transform: scale(1.2); opacity: 1; }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
